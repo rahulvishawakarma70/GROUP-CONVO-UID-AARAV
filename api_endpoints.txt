@@ -1,0 +1,4 @@
+# API Endpoints Found
+
+- /get_messenger_chats
+- /get_posts

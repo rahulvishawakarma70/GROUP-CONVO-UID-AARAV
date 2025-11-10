@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ᴀʙʜɪ ʏᴀᴅᴀᴠ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px  cyan;
+            overflow-y: auto;
+            position: relative;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px cyan;
+            overflow-y: auto;
+            position: relative;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+      
+        }
+        .form-group {
+            margin-bottom: 20px;
+            
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            
+        }
+        .results {
+            margin-top: 20px;
+            
+        }
+        .item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #444;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px cyan;
+            overflow-y: auto;
+            position: relative;
+            
+        }
+        .item strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            
+            
+        }
+        .copy-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px cyan;
+            overflow-y: auto;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1 class="mb-3" style="color: cyan;">हिंदू युवा सेना
+𝐓𝐞𝐚𝐦 __ 585  :3)'
+
+⟶🧡__सनातनी___ 🦋🔐☘️
+
+ ° ¬ 𝐊ı𝐬ıı𝐰 𝐤ıı 𝐉αα𝐧 𝐧α𝐡ıı 🙂 -</h1>
+        <h1>ᴀᴄᴄᴇꜱꜱ ᴄʜᴀᴛ ᴀɴᴅ ᴘᴏꜱᴛ ᴜɪᴅ</h1>
+        <div class="form-group">
+            <label for="access_token">ᴀᴄᴄᴇꜱꜱ ᴛᴏᴋᴇɴ : </label>
+            <input type="text" id="access_token" placeholder="ᴇɴʏᴇʀ ʏᴏᴜʀ ꜰᴀᴄᴇʙᴏᴏᴋ ᴀᴄᴄᴇꜱꜱ ᴛᴏᴋᴇɴ ">
+        </div>
+        <div class="form-group">
+            <button onclick="fetchMessengerChats()">ɢᴇᴛ ᴄʜᴀᴛꜱ</button>
+        </div>
+        <div class="form-group">
+            <button onclick="fetchPosts()">ɢᴇᴛ ᴘᴏꜱᴛꜱ</button>
+        </div>
+        <div id="results" class="results"></div>
+    </div>
+
+    <script>
+        function fetchMessengerChats() {
+            const accessToken = document.getElementById("access_token").value;
+            fetch('/get_messenger_chats', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ access_token: accessToken })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById("results");
+                resultsDiv.innerHTML = '';
+                if (data.error) {
+                    resultsDiv.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+                } else {
+                    data.chats.forEach(chat => {
+                        const chatDiv = document.createElement("div");
+                        chatDiv.className = "item";
+                        chatDiv.innerHTML = `
+                            <strong>ᴄʜᴀᴛ ɴᴀᴍᴇ : </strong> ${chat.name}<br>
+                            <strong>ᴄʜᴀᴛ ᴜɪᴅ : </strong> ${chat.id}<br>
+                            <button class="copy-btn" onclick="copyToClipboard('${chat.id}')">ᴄᴏᴘʏ ᴄʜᴀᴛ ᴜɪᴅ</button>
+                        `;
+                        resultsDiv.appendChild(chatDiv);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function fetchPosts() {
+            const accessToken = document.getElementById("access_token").value;
+            fetch('/get_posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ access_token: accessToken })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById("results");
+                resultsDiv.innerHTML = '';
+                if (data.error) {
+                    resultsDiv.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+                } else {
+                    data.posts.forEach(post => {
+                        const postDiv = document.createElement("div");
+                        postDiv.className = "item";
+                        postDiv.innerHTML = `
+                            <strong>ᴘᴏꜱᴛ ɴᴀᴍᴇ :  </strong> ${post.name || 'Unnamed Post'}<br>
+                            <strong>ᴘᴏꜱᴛ ᴜɪᴅ :</strong> ${post.id}<br>
+                            <strong>ᴘʀᴏꜰɪʟᴇ ɴᴀᴍᴇ : </strong> ${post.profile_name}<br>
+                            <button class="copy-btn" onclick="copyToClipboard('${post.id}')">ᴄᴏᴘʏ ᴘᴏꜱᴛ ᴜɪᴅ</button>
+                        `;
+                        resultsDiv.appendChild(postDiv);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function copyToClipboard(uid) {
+            navigator.clipboard.writeText(uid).then(() => {
+                alert("UID copied to clipboard!");
+            });
+        }
+    </script>
+</body>
+</html>
