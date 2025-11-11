@@ -1,6 +1,5 @@
 # WEBSITE CODE EXTRACTIONS REPORT 
 
-Website: https://2-page-sarver.vercel.app/
 EXTRACTION DATE: 5430191.259376271
 
 ## Summary:
